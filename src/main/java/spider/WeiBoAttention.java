@@ -302,7 +302,7 @@ public class WeiBoAttention {
 
     public void runTenStar() throws InterruptedException {
 
-        code("5612953946", "_2A250YFf6DeTxGeNI6lAY9S3FzzqIHXVVT3G5rDV6PUJbkdAKLWHRkWqaacT1iy2J-OtA8islFEYdpYMYdw..", "66cff4b0");
+      /*  code("5612953946", "_2A250YFf6DeTxGeNI6lAY9S3FzzqIHXVVT3G5rDV6PUJbkdAKLWHRkWqaacT1iy2J-OtA8islFEYdpYMYdw..", "66cff4b0");
         Thread.sleep(2000);
         code("5606426713", "_2A250Wdk4DeTxGeNI61QV8ijLyj-IHXVVTdFcrDV6PUJbkdAKLRLykWoFjx9vAcMZiHEWu37HjrvAOJhhpQ..", "311dd2f1");
         Thread.sleep(2000);
@@ -314,10 +314,10 @@ public class WeiBoAttention {
         Thread.sleep(2000);
         code("5773073053", "_2A250ZpCxDeTxGeNJ7FER9y3Mzj-IHXVVTTaerDV6PUJbkdANLULkkWpeqfRBNdEn4whVkQtSIMKALroheA..", "18bba3d5");
         Thread.sleep(2000);
-        code("5778135054", "_2A250YFnlDeTxGeNJ7FoQ8yvMzjiIHXVVTCVGrDV6PUJbkdANLRD8kWpAqod7yK_98zmw8hR2XiitGJwHmQ..", "517230c1");
+        code("5778135054", "_2A250YFnlDeTxGeNJ7FoQ8yvMzjiIHXVVTCVGrDV6PUJbkdANLRD8kWpAqod7yK_98zmw8hR2XiitGJwHmQ..", "517230c1");*/
 
 
-       /* new WeiBoAttention().sendAttention("5612953946",
+        new WeiBoAttention().sendAttention("5612953946",
                 "_2A250YFf6DeTxGeNI6lAY9S3FzzqIHXVVT3G5rDV6PUJbkdAKLWHRkWqaacT1iy2J-OtA8islFEYdpYMYdw..", "66cff4b0");
 
         // new WeiBoAttention().sendAttention("5777882736",
@@ -345,12 +345,12 @@ public class WeiBoAttention {
         //          "_2A250Xz-oDeTxGeNI6lAW9C7FyjSIHXVVTTRgrDV6PUJbkdAKLUHAkWqCk0ekdDidegqupKiX6VO482jayA..", "00ed022b");
 
         new WeiBoAttention().sendAttention("5778135054",
-                "_2A250YFnlDeTxGeNJ7FoQ8yvMzjiIHXVVTCVGrDV6PUJbkdANLRD8kWpAqod7yK_98zmw8hR2XiitGJwHmQ..", "517230c1");*/
+                "_2A250YFnlDeTxGeNJ7FoQ8yvMzjiIHXVVTCVGrDV6PUJbkdANLRD8kWpAqod7yK_98zmw8hR2XiitGJwHmQ..", "517230c1");
     }
 
     public static void main(String[] args) throws ParseException, InterruptedException {
 
-        new WeiBoAttention().getStarId("5612953946",
+      /*  new WeiBoAttention().getStarId("5612953946",
                 "_2A250YFf6DeTxGeNI6lAY9S3FzzqIHXVVT3G5rDV6PUJbkdAKLWHRkWqaacT1iy2J-OtA8islFEYdpYMYdw..", "66cff4b0");
         new WeiBoAttention().getStarId("5606426713",
                 "_2A250Wdk4DeTxGeNI61QV8ijLyj-IHXVVTdFcrDV6PUJbkdAKLRLykWoFjx9vAcMZiHEWu37HjrvAOJhhpQ..", "311dd2f1");
@@ -361,15 +361,35 @@ public class WeiBoAttention {
         new WeiBoAttention().getStarId("5612734149",
                 "_2A250Wd3yDeTxGeNI6lAW8yrNzzWIHXVVTcjcrDV6PUJbkdAKLUGikWoQftUADwxMJpaIwN97YYCdLtLsog..", "27750d24");
         new WeiBoAttention().getStarId("5778135054",
-                "_2A250YFnlDeTxGeNJ7FoQ8yvMzjiIHXVVTCVGrDV6PUJbkdANLRD8kWpAqod7yK_98zmw8hR2XiitGJwHmQ..", "517230c1");
+                "_2A250YFnlDeTxGeNJ7FoQ8yvMzjiIHXVVTCVGrDV6PUJbkdANLRD8kWpAqod7yK_98zmw8hR2XiitGJwHmQ..", "517230c1");*/
 
 
-    /*    try {
+     /*   try {
             new WeiBoAttention().runTenStar();
             // new WeiBoAttention().getStarId("5773073053", "_2A250ZpCxDeTxGeNJ7FER9y3Mzj-IHXVVTTaerDV6PUJbkdANLULkkWpeqfRBNdEn4whVkQtSIMKALroheA..", "18bba3d5", 1);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }*/
+
+
+        new WeiBoAttention().Attentions(1730113683, 1,
+                "_2A250YFf6DeTxGeNI6lAY9S3FzzqIHXVVT3G5rDV6PUJbkdAKLWHRkWqaacT1iy2J-OtA8islFEYdpYMYdw..", "66cff4b0");
+        Thread.sleep(2000);
+        new WeiBoAttention().Attentions(1730113683, 1,
+                "_2A250Wdk4DeTxGeNI61QV8ijLyj-IHXVVTdFcrDV6PUJbkdAKLRLykWoFjx9vAcMZiHEWu37HjrvAOJhhpQ..", "311dd2f1");
+        Thread.sleep(2000);
+        new WeiBoAttention().Attentions(1730113683, 1,
+                "_2A250Ya6oDeTxGeNJ7FsV8CzNyD6IHXVVMZhSrDV6PUJbkdANLWL7kWpRAkym0Eu51nmyV77tZugnhKwFHg..", "e24cac07");
+        Thread.sleep(2000);
+        new WeiBoAttention().Attentions(1730113683, 1,
+                "_2A250WepdDeTxGeNI61QS9i_FzzSIHXVVT3qVrDV6PUJbkdANLWegkWp9uBh_FiXiJOO5BwCLnqGj38ZXuQ..", "9432cf6a");
+        Thread.sleep(2000);
+        new WeiBoAttention().Attentions(1730113683, 1,
+                "_2A250Wd3yDeTxGeNI6lAW8yrNzzWIHXVVTcjcrDV6PUJbkdAKLUGikWoQftUADwxMJpaIwN97YYCdLtLsog..", "27750d24");
+        Thread.sleep(2000);
+        new WeiBoAttention().Attentions(1730113683, 1,
+                "_2A250YFnlDeTxGeNJ7FoQ8yvMzjiIHXVVTCVGrDV6PUJbkdANLRD8kWpAqod7yK_98zmw8hR2XiitGJwHmQ..", "517230c1");
+        Thread.sleep(2000);
 
     }
 }
