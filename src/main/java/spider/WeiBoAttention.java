@@ -324,8 +324,8 @@ public class WeiBoAttention {
         // new WeiBoAttention().sendAttention("5777882736",
         //         "_2A250WoLRDeTxGeNJ7FUZ-CzLyDqIHXVVT30VrDV6PUJbkdAKLW3akWplwIaide8MuRl7Sys2_Qde3Zjd8g..", "7b3ed342");
 
-       /* new WeiBoAttention().sendAttention("5606426713",
-                "_2A250Wdk4DeTxGeNI61QV8ijLyj-IHXVVTdFcrDV6PUJbkdAKLRLykWoFjx9vAcMZiHEWu37HjrvAOJhhpQ..", "311dd2f1");*/
+        new WeiBoAttention().sendAttention("5606426713",
+                "_2A250Wdk4DeTxGeNI61QV8ijLyj-IHXVVTdFcrDV6PUJbkdAKLRLykWoFjx9vAcMZiHEWu37HjrvAOJhhpQ..", "311dd2f1");
 
         new WeiBoAttention().sendAttention("5779402132",
                 "_2A250adauDeTxGeNJ7FsV8CzNyD6IHXVVP21mrDV6PUJbkdAKLXHskWoZaefgeE5gYyJ4NXbpwoXspgjOCQ..", "e24cac07");

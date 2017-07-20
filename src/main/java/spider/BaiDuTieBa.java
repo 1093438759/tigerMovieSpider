@@ -1,58 +1,109 @@
 package spider;
 
 
-import dao.DataSwitch;
 import dao.SendRequestResponse;
+import org.apache.http.HttpHost;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
-import org.json.JSONArray;
 import org.json.JSONObject;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import sun.misc.BASE64Encoder;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.text.Collator;
+import java.util.*;
 
 /**
  * Created by ty on 2017/7/19.
  */
 public class BaiDuTieBa {
 
-    public static void getAttentionBar(String name) throws IOException {
-        String url = "https://tieba.baidu.com/mo/q/search/forum?word=" + name + "&godrn=3";
+    public static void getAttentionBar(String id, String name, String jiaMi) throws IOException {
+        //String url = "https://tieba.baidu.com/mo/q/search/forum?word=" + name + "&godrn=3";
+        String url = "http://c.tieba.baidu.com/c/f/frs/page";
         HttpClient httpClient = HttpClients.createDefault();
-        HttpGet httpGet = new HttpGet(url);
-        HttpResponse respons = httpClient.execute(httpGet);
-        String bar = EntityUtils.toString(respons.getEntity());
+        HttpPost httpPost = new HttpPost(url);
+       /* HttpHost proxy = new HttpHost("192.168.110.1", 8888, "http");
+        RequestConfig config = RequestConfig.custom().setProxy(proxy).build();
+        httpPost.setConfig(config);*/
+        httpPost.setHeader("P3p", "CP=\" OTI DSP COR IVA OUR IND COM \"");
+        StringEntity entity = new StringEntity(jiaMi.toString(), "utf-8");
+        httpPost.setEntity(entity);
+        HttpResponse response = httpClient.execute(httpPost);
+        String bar = EntityUtils.toString(response.getEntity());
         JSONObject jsonObject = new JSONObject(bar);
-        JSONObject data = jsonObject.getJSONObject("data");//.getJSONObject("exactMatch");
-        JSONObject exactMatch;
         JSONObject actor = new JSONObject();
-        try {
-            exactMatch = data.getJSONObject("exactMatch");
-            String starName = exactMatch.getString("forum_name");
-            System.out.println(starName);
-            if (name.equals(starName)) {
-                long post_num = DataSwitch.toNum(exactMatch.get("post_num").toString());//贴子数
-                long concern_num = DataSwitch.toNum(exactMatch.get("concern_num").toString());//关注
-                System.out.println("贴子数" + post_num + "关注" + concern_num);
-                actor.put("name", name);
-                actor.put("numberPosts", post_num);
-                actor.put("attention", concern_num);
-                actor.put("address", url);
-                new SendRequestResponse().sendPostQequest("http://127.0.0.1:3000/star/baiDu", actor);
-            }
-        } catch (Exception e) {
-            actor.put("name", name);
-            new SendRequestResponse().sendPostQequest("http://127.0.0.1:3000/star/baiDu", actor);
-            System.out.println("没有这个艺人" + name);
+        if (!jsonObject.has("error_msg")) {
+            JSONObject forum = jsonObject.getJSONObject("forum");
+            long attention = Long.parseLong(forum.getString("member_num"));//關注
+            long numberPosts = Long.parseLong(forum.getString("thread_num"));//帖子數
+            actor.put("attention", attention);
+            actor.put("numberPosts", numberPosts);
         }
+        actor.put("url", url);
+        actor.put("name", name);
+        actor.put("id", id);
+        new SendRequestResponse().sendPostQequest("http://127.0.0.1:3000/star/baiDu", actor);
     }
 
-    public static void run() throws IOException, InterruptedException {
 
+    public static String getSign(Map<String, String> parameters) throws NoSuchAlgorithmException, UnsupportedEncodingException {
+        List<String> list = new ArrayList<String>();
+        for (String key : parameters.keySet()) {
+            list.add(String.format("%s%s%s", key, "=", parameters.get(key)));
+        }
+        Collections.sort(list, Collator.getInstance(java.util.Locale.CHINA));
+//        list.sort(new Comparison<String>(Request.SortString));
+        StringBuilder StringBuilder = new StringBuilder();
+        for (String current2 : list) {
+            StringBuilder.append(current2);
+            //  System.out.println(current2);
+        }
+        StringBuilder.append("tiebaclient!!!");
+        return encryption(StringBuilder.toString());
+
+    }
+
+    public static String encryption(String plain) {
+        String re_md5 = new String();
+        try {
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            md.update(plain.getBytes());
+            byte b[] = md.digest();
+
+            int i;
+
+            StringBuffer buf = new StringBuffer("");
+            for (int offset = 0; offset < b.length; offset++) {
+                i = b[offset];
+                if (i < 0)
+                    i += 256;
+                if (i < 16)
+                    buf.append("0");
+                buf.append(Integer.toHexString(i));
+            }
+
+            re_md5 = buf.toString();
+
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        return re_md5;
+    }
+
+
+    public static void run() throws IOException, InterruptedException, NoSuchAlgorithmException {
         Map<String, String> map = new HashMap<String, String>();
         map.put("564596bc756a5d75424af84a", "久石让");
         map.put("56459945756a5d75424b290e", "秦怡");
@@ -4155,18 +4206,27 @@ public class BaiDuTieBa {
         map.put("565840cd756a5d7542653a09", "汤盈盈");
         map.put("56585106756a5d754265b0c1", "尹天照");
         map.put("56587f9b756a5d7542675411", "海俊杰");
-        for (String name : map.keySet())
-            BaiDuTieBa.getAttentionBar(map.get(name));
+
+        for (String id : map.keySet()) {
+            Map<String, String> encryption = new HashMap<String, String>();
+            encryption.put("kw", map.get(id));
+            encryption.put("rn", "30");
+            encryption.put("net_type", "3");
+            encryption.put("_client_type", "4");
+            encryption.put("_client_id", "03-00-5E-87-08-00-FA-5E-05-00-D6-D9-06-00-01-00-04-00-9E-0C-04-00-7E-31-04-00-06-A2-04-00-D6-C9-01-00-34-90-02-00-C0-49-09-00-F6-A1");
+            encryption.put("_client_version", "1.5.0.0");
+            encryption.put("_phone_imei", "159692fb4bf2922d57993f3963e60b17");
+            String sign = getSign(encryption);
+            String kw = URLDecoder.decode(map.get(id), "utf-8");
+            String jiaMi = "kw="+kw+"&rn=30&net_type=3&_client_type=4&_client_id=03-00-5E-87-08-00-FA-5E-05-00-D6-D9-06-00-01-00-04-00-9E-0C-04-00-7E-31-04-00-06-A2-04-00-D6-C9-01-00-34-90-02-00-C0-49-09-00-F6-A1" +
+                    "&_client_version=1.5.0.0&_phone_imei=159692fb4bf2922d57993f3963e60b17&sign=" + sign;
+            BaiDuTieBa.getAttentionBar(id, map.get(id), jiaMi);
+        }
 
     }
 
-    public static void main(String[] args) {
-        try {
-            BaiDuTieBa.run();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+    public static void main(String[] args) throws IOException, InterruptedException, NoSuchAlgorithmException {
+        BaiDuTieBa.run();
+
     }
 }
