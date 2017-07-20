@@ -174,12 +174,14 @@ public class WeiBoAttention {
         JSONArray allAttention = getAllNoAttention();
         if (allAttention == null || allAttention.length() == 0) {
             JSONArray partNoAttention = getNoAttention(sid);   //未关注的  3000
+            System.out.println(partNoAttention);
+            Thread.sleep(120000);
             JSONArray partAttention = getAttention(sid);       //关注的    1000
             int record = partAttention.getJSONObject(partAttention.length() - 1).getInt("record"); //单前关注最大的数
             int now = 0;
             for (int j = 0; j < partNoAttention.length(); j++) {
                 int aa = partNoAttention.getJSONObject(j).getInt("record");
-                if (record + 1 < 4367) {
+                if (record + 1 < 4347) {
                     if (record + 1 == aa) {
                         now = j;
                     }
@@ -188,7 +190,6 @@ public class WeiBoAttention {
                 }
             }
             int discrepancy = partNoAttention.length() - now; //两数相差
-
             if (discrepancy >= 75) {
                 //   int sum = 1;
                 for (int i = now; i < 75 + now; i++) {
@@ -238,7 +239,7 @@ public class WeiBoAttention {
     public void getStarId(String sid, String gisd, String s) throws InterruptedException {
         //遍历获取关注id
         int sum = 1;
-        for (int i = 1; i <= 100; i++) {
+        for (int i = 1; i <= 4; i++) {
             String html = new WeiBoAttention().getHtml(i, gisd, s);
             JSONObject jsonObject = new JSONObject(html);
             if (jsonObject.length() == 1)
@@ -302,112 +303,64 @@ public class WeiBoAttention {
 
     public void runTenStar() throws InterruptedException {
 
-      /*  code("5612953946", "_2A250YFf6DeTxGeNI6lAY9S3FzzqIHXVVT3G5rDV6PUJbkdAKLWHRkWqaacT1iy2J-OtA8islFEYdpYMYdw..", "66cff4b0");
+       /* code("5612953946", "_2A250YFf6DeTxGeNI6lAY9S3FzzqIHXVVT3G5rDV6PUJbkdAKLWHRkWqaacT1iy2J-OtA8islFEYdpYMYdw..", "66cff4b0");
         Thread.sleep(2000);
         code("5606426713", "_2A250Wdk4DeTxGeNI61QV8ijLyj-IHXVVTdFcrDV6PUJbkdAKLRLykWoFjx9vAcMZiHEWu37HjrvAOJhhpQ..", "311dd2f1");
         Thread.sleep(2000);
-        code("5779402132", "_2A250WouaDeTxGeNJ7FsV8CzNyD6IHXVVMZhSrDV6PUJbkdANLWL7kWoHK2W3rtM5pvNOa_q-pWtm_a7DAw..", "e24cac07");
+        code("5779402132", "_2A250adauDeTxGeNJ7FsV8CzNyD6IHXVVP21mrDV6PUJbkdAKLXHskWoZaefgeE5gYyJ4NXbpwoXspgjOCQ..", "e24cac07");
         Thread.sleep(2000);
         code("5606361948", "_2A250WepdDeTxGeNI61QS9i_FzzSIHXVVT3qVrDV6PUJbkdANLWegkWp9uBh_FiXiJOO5BwCLnqGj38ZXuQ..", "9432cf6a");
         Thread.sleep(2000);
-        code("5612734149", "_2A250Wd3yDeTxGeNI6lAW8yrNzzWIHXVVTcjcrDV6PUJbkdAKLUGikWoQftUADwxMJpaIwN97YYCdLtLsog..", "27750d24");
+        code("5612734149", "_2A250ae7aDeTxGeNI6lAW8yrNzzWIHXVVP2USrDV6PUJbkdANLUaskWo4e_PQoZC1myTuYeodUtzv7-GiYg..", "27750d24");
         Thread.sleep(2000);
-        code("5773073053", "_2A250ZpCxDeTxGeNJ7FER9y3Mzj-IHXVVTTaerDV6PUJbkdANLULkkWpeqfRBNdEn4whVkQtSIMKALroheA..", "18bba3d5");
-        Thread.sleep(2000);
-        code("5778135054", "_2A250YFnlDeTxGeNJ7FoQ8yvMzjiIHXVVTCVGrDV6PUJbkdANLRD8kWpAqod7yK_98zmw8hR2XiitGJwHmQ..", "517230c1");*/
+        //code("5773073053", "_2A250ZpCxDeTxGeNJ7FER9y3Mzj-IHXVVTTaerDV6PUJbkdANLULkkWpeqfRBNdEn4whVkQtSIMKALroheA..", "18bba3d5");
+       // Thread.sleep(2000);
+        code("5778135054", "_2A250aeyeDeTxGeNJ7FoQ8yvMzjiIHXVVTCVGrDV6PUJbkdANLRD8kWqADb6P_1KSlm7dOFD1uPnnSGF76Q..", "517230c1");
+        Thread.sleep(12000);*/
 
-
-        new WeiBoAttention().sendAttention("5612953946",
+      /*  new WeiBoAttention().sendAttention("5612953946",
                 "_2A250YFf6DeTxGeNI6lAY9S3FzzqIHXVVT3G5rDV6PUJbkdAKLWHRkWqaacT1iy2J-OtA8islFEYdpYMYdw..", "66cff4b0");
-
+*/
         // new WeiBoAttention().sendAttention("5777882736",
         //         "_2A250WoLRDeTxGeNJ7FUZ-CzLyDqIHXVVT30VrDV6PUJbkdAKLW3akWplwIaide8MuRl7Sys2_Qde3Zjd8g..", "7b3ed342");
 
-        new WeiBoAttention().sendAttention("5606426713",
-                "_2A250Wdk4DeTxGeNI61QV8ijLyj-IHXVVTdFcrDV6PUJbkdAKLRLykWoFjx9vAcMZiHEWu37HjrvAOJhhpQ..", "311dd2f1");
+       /* new WeiBoAttention().sendAttention("5606426713",
+                "_2A250Wdk4DeTxGeNI61QV8ijLyj-IHXVVTdFcrDV6PUJbkdAKLRLykWoFjx9vAcMZiHEWu37HjrvAOJhhpQ..", "311dd2f1");*/
 
         new WeiBoAttention().sendAttention("5779402132",
-                "_2A250Ya6oDeTxGeNJ7FsV8CzNyD6IHXVVMZhSrDV6PUJbkdANLWL7kWpRAkym0Eu51nmyV77tZugnhKwFHg..", "e24cac07");
+                "_2A250adauDeTxGeNJ7FsV8CzNyD6IHXVVP21mrDV6PUJbkdAKLXHskWoZaefgeE5gYyJ4NXbpwoXspgjOCQ..", "e24cac07");
 
         //new WeiBoAttention().sendAttention("5769060256",
         //        "_2A250WduGDeTxGeNJ7VsR9i7OzjqIHXVVTcr7rDV6PUJbkdAKLW7ckWpjMwv55LPcrBGdqS1RDFnvwlpXfQ..", "981d0d69");
 
-        new WeiBoAttention().sendAttention("5606361948",
+     /*   new WeiBoAttention().sendAttention("5606361948",
                 "_2A250WepdDeTxGeNI61QS9i_FzzSIHXVVT3qVrDV6PUJbkdANLWegkWp9uBh_FiXiJOO5BwCLnqGj38ZXuQ..", "9432cf6a");
 
         new WeiBoAttention().sendAttention("5612734149",
-                "_2A250Wd3yDeTxGeNI6lAW8yrNzzWIHXVVTcjcrDV6PUJbkdAKLUGikWoQftUADwxMJpaIwN97YYCdLtLsog..", "27750d24");
-
+                "_2A250ae7aDeTxGeNI6lAW8yrNzzWIHXVVP2USrDV6PUJbkdANLUaskWo4e_PQoZC1myTuYeodUtzv7-GiYg..", "27750d24");
+*/
         //  new WeiBoAttention().sendAttention("5773073053",
         //        "_2A250ZpCxDeTxGeNJ7FER9y3Mzj-IHXVVTTaerDV6PUJbkdANLULkkWpeqfRBNdEn4whVkQtSIMKALroheA..", "18bba3d5");
 
         // new WeiBoAttention().sendAttention("5612740918",
         //          "_2A250Xz-oDeTxGeNI6lAW9C7FyjSIHXVVTTRgrDV6PUJbkdAKLUHAkWqCk0ekdDidegqupKiX6VO482jayA..", "00ed022b");
-
+/*
         new WeiBoAttention().sendAttention("5778135054",
-                "_2A250YFnlDeTxGeNJ7FoQ8yvMzjiIHXVVTCVGrDV6PUJbkdANLRD8kWpAqod7yK_98zmw8hR2XiitGJwHmQ..", "517230c1");
+                "_2A250aeyeDeTxGeNJ7FoQ8yvMzjiIHXVVTCVGrDV6PUJbkdANLRD8kWqADb6P_1KSlm7dOFD1uPnnSGF76Q..", "517230c1");*/
     }
 
     public static void main(String[] args) throws ParseException, InterruptedException {
 
-      /*  new WeiBoAttention().getStarId("5612953946",
-                "_2A250YFf6DeTxGeNI6lAY9S3FzzqIHXVVT3G5rDV6PUJbkdAKLWHRkWqaacT1iy2J-OtA8islFEYdpYMYdw..", "66cff4b0");
-        new WeiBoAttention().getStarId("5606426713",
-                "_2A250Wdk4DeTxGeNI61QV8ijLyj-IHXVVTdFcrDV6PUJbkdAKLRLykWoFjx9vAcMZiHEWu37HjrvAOJhhpQ..", "311dd2f1");
-        new WeiBoAttention().getStarId("5779402132",
-                "_2A250Ya6oDeTxGeNJ7FsV8CzNyD6IHXVVMZhSrDV6PUJbkdANLWL7kWpRAkym0Eu51nmyV77tZugnhKwFHg..", "e24cac07");
-        new WeiBoAttention().getStarId("5606361948",
-                "_2A250WepdDeTxGeNI61QS9i_FzzSIHXVVT3qVrDV6PUJbkdANLWegkWp9uBh_FiXiJOO5BwCLnqGj38ZXuQ..", "9432cf6a");
-        new WeiBoAttention().getStarId("5612734149",
-                "_2A250Wd3yDeTxGeNI6lAW8yrNzzWIHXVVTcjcrDV6PUJbkdAKLUGikWoQftUADwxMJpaIwN97YYCdLtLsog..", "27750d24");
-        new WeiBoAttention().getStarId("5778135054",
-                "_2A250YFnlDeTxGeNJ7FoQ8yvMzjiIHXVVTCVGrDV6PUJbkdANLRD8kWpAqod7yK_98zmw8hR2XiitGJwHmQ..", "517230c1");*/
 
-
-     /*   try {
+        try {
             new WeiBoAttention().runTenStar();
             // new WeiBoAttention().getStarId("5773073053", "_2A250ZpCxDeTxGeNJ7FER9y3Mzj-IHXVVTTaerDV6PUJbkdANLULkkWpeqfRBNdEn4whVkQtSIMKALroheA..", "18bba3d5", 1);
         } catch (InterruptedException e) {
             e.printStackTrace();
-        }*/
-
-
-        new WeiBoAttention().Attentions(1730113683, 1,
-                "_2A250YFf6DeTxGeNI6lAY9S3FzzqIHXVVT3G5rDV6PUJbkdAKLWHRkWqaacT1iy2J-OtA8islFEYdpYMYdw..", "66cff4b0");
-        Thread.sleep(2000);
-        new WeiBoAttention().Attentions(1730113683, 1,
-                "_2A250Wdk4DeTxGeNI61QV8ijLyj-IHXVVTdFcrDV6PUJbkdAKLRLykWoFjx9vAcMZiHEWu37HjrvAOJhhpQ..", "311dd2f1");
-        Thread.sleep(2000);
-        new WeiBoAttention().Attentions(1730113683, 1,
-                "_2A250Ya6oDeTxGeNJ7FsV8CzNyD6IHXVVMZhSrDV6PUJbkdANLWL7kWpRAkym0Eu51nmyV77tZugnhKwFHg..", "e24cac07");
-        Thread.sleep(2000);
-        new WeiBoAttention().Attentions(1730113683, 1,
-                "_2A250WepdDeTxGeNI61QS9i_FzzSIHXVVT3qVrDV6PUJbkdANLWegkWp9uBh_FiXiJOO5BwCLnqGj38ZXuQ..", "9432cf6a");
-        Thread.sleep(2000);
-        new WeiBoAttention().Attentions(1730113683, 1,
-                "_2A250Wd3yDeTxGeNI6lAW8yrNzzWIHXVVTcjcrDV6PUJbkdAKLUGikWoQftUADwxMJpaIwN97YYCdLtLsog..", "27750d24");
-        Thread.sleep(2000);
-        new WeiBoAttention().Attentions(1730113683, 1,
-                "_2A250YFnlDeTxGeNJ7FoQ8yvMzjiIHXVVTCVGrDV6PUJbkdANLRD8kWpAqod7yK_98zmw8hR2XiitGJwHmQ..", "517230c1");
-        Thread.sleep(2000);
+        }
 
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
        /* Set<Integer> set = new HashSet<Integer>();
         List<Integer> list = new ArrayList<Integer>();
         JSONArray jsonArray1 = new WeiBoAttention().getAttention("5612953946");

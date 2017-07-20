@@ -18,9 +18,9 @@ public class DataSwitch {
         SimpleDateFormat sdf;
         if (date.length() == 10) {
             sdf = new SimpleDateFormat("yyyy-MM-dd");
-        } else if (date.length() == 8){
+        } else if (date.length() == 8) {
             sdf = new SimpleDateFormat("yyyyMMdd");
-        }else {
+        } else {
             sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         }
         try {
@@ -44,6 +44,10 @@ public class DataSwitch {
             return (long) num * 100000000;
         }
         if (stringNumber.indexOf("万") != -1) {
+            double num = Double.parseDouble(stringNumber.substring(0, stringNumber.length() - 1));
+            return (long) num * 10000;
+        }
+        if (stringNumber.indexOf("W") != -1) {
             double num = Double.parseDouble(stringNumber.substring(0, stringNumber.length() - 1));
             return (long) num * 10000;
         }
